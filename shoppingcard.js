@@ -1,31 +1,10 @@
-/* fonction de recupération panier
-
-const shoppingcard= JSON.parse(localStorage.getItem("products")) || [];
-
-
-
-let btnplusshoppingcard= document.querySelector("#bouton");
-btnplusshoppingcard.addEventListener("click",()=> {
-    let quantity= document.querySelector(".quantity");
-
-    let isInshoppingcard= false;
-    if(isInshoppingcard= true){
-    shoppingcard.quantity = + shoppingcard.quantity + quantity;
-    localStorage.setItem("products",JSON.stringify(shoppingcard));
-    } else {shoppingcard.push(products);
-        localStorage.setItem("products",JSON.stringify(shoppingcard)); 
-    }    
- }
-)*/
 
 // fonctions pour evenements d'ajout,dimunition,suppression et like dans le panier //
 
 
 var box = document.getElementsByClassName("card");
 
-var Totalprice = document.querySelector(".total");
-
-var garbage = document.getElementsByClassName("garbage")
+var garbage = document.getElementsByClassName("garbage");
 
 
 for (let i = 0; i < box.length; i++) {
@@ -33,6 +12,7 @@ for (let i = 0; i < box.length; i++) {
     let btnplus = box[i].children[1].children[3].children[0];
     let btnmoins = box[i].children[1].children[3].children[2];
     let amount = box[i].children[1].children[2];
+
 
     let nobuy = garbage[i].children[0];
 
@@ -44,23 +24,26 @@ for (let i = 0; i < box.length; i++) {
     //  fonction d'ajout d'éléments 
 
     btnplus.addEventListener("click", () => {
-        nombre.innerText = ++qty;
+        qty++;
+        nombre.innerText = qty;
         amount.innerText = qty * innerprice + ' $';
-        Totalprice.innerText = amount.innerText; 
-    })
+
+    }
+
+    )
 
     // fonction de diminution d'éléments
 
     btnmoins.addEventListener("click", () => {
-        
-        if (qty >= 0) {
-            Totalprice=0 + " $";
-    
-            nombre.innerText = --qty;amount.innerText -= qty*innerprice + " $";Totalprice.innerText = amount.innerText;
+
+        if (qty > 0) {
+            qty--;
+            nombre.innerText = qty;
         }
         if (qty >= 1) {
-            amount.innerText = qty * innerprice + ' $';
-            Totalprice.innerText += amount.innerText;
+            amount.innerText = innerprice + " $";
+            amount.innerText = qty * innerprice + " $";
+
 
         }
     })
@@ -73,34 +56,68 @@ for (let i = 0; i < box.length; i++) {
     })
 }
 
-// fonction de "like"
+// fonction de "like" et "dislike"
 
 document.querySelectorAll(".fa-heart").forEach((elem) => {
 
     elem.addEventListener("click", () => {
-        elem.style.color = 'blueviolet';
+        if (elem.style.color == 'black') {
+            elem.style.color = 'blueviolet';
+        } else {
+            elem.style.color = 'black';
+        }
     })
-}
-)
-
-
-
-
-
-
-/**fonction d'ajustement de quantité pour chaque article;
-var box=document.getElementsByClassName("card");
-for(var i in box){
-let btplus= document.querySelectorAll(".fa-plus-circle");
-let btmoins=document.querySelectorAll(".fa-minus-circle");
-let number=document.querySelectorAll(".quantity");
-let qtity=parseInt(number.innerText);
-    btplus.addEventListener("click",()=> {
-        qtity++;
-        number.innerText= qtity;
-    })
-    btmoins.addEventListener("click",()=>{
-    qtity--;
-    number.innerText=qtity;
 })
-}**/
+
+
+// Prix total panier
+
+var price = document.querySelectorAll(".unit-price");
+var qtity = document.querySelectorAll(".quantity");
+
+
+let plusAll = document.querySelectorAll(".fa-plus-circle");
+let minusAll = document.querySelectorAll(".fa-minus-circle");
+
+plusAll.forEach((plus) => { plus.addEventListener("click", totalPrice) });
+minusAll.forEach((minus) => { minus.addEventListener("click", totalPrice) });
+
+function totalPrice() {
+    let total = 0;
+    price.forEach((elem) => {
+        let unitprice = parseInt(elem.innerText);
+        if (elem.nextElementSibling.firstElementChild.nextElementSibling.innerText >= 1) {
+            total += unitprice;
+            document.querySelector(".total").innerText = total + " $";
+        }
+    });
+}
+
+
+function priceTotal() {
+    let total=0;
+    price.forEach((elt)=>{
+        let uprice= parseInt(elt.innerText);
+        if(elt.nextElementSibling.firstElementChild.nextElementSibling.innerText=0){
+            total+;
+            document.querySelector(".total").innerText= 0 + " $";
+        }else{
+            total+=uprice;
+            document.querySelector(".toatl").innerText= total + " $";
+        }
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
