@@ -4,9 +4,6 @@
 
 var box = document.getElementsByClassName("card");
 
-var garbage = document.getElementsByClassName("garbage");
-
-
 for (let i = 0; i < box.length; i++) {
     let nombre = box[i].children[1].children[3].children[1];
     let btnplus = box[i].children[1].children[3].children[0];
@@ -14,7 +11,6 @@ for (let i = 0; i < box.length; i++) {
     let amount = box[i].children[1].children[2];
 
 
-    let nobuy = garbage[i].children[0];
 
     let innerprice = parseInt(amount.innerText);
     let qty = parseInt(nombre.innerText);
@@ -50,30 +46,35 @@ for (let i = 0; i < box.length; i++) {
 
     // fonction de suppression d'éléments
 
-    nobuy.addEventListener("click", () => {
-        nombre.innerText = 0; amount.innerText = innerprice + " $"; qty = 0;
+    document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
+        let uprix = parseInt(elem.parentElement.previousElementSibling.previousElementSibling.innerText);
+        qty = elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText;
 
+        elem.addEventListener("click", () => {
+            elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
+            elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
+            qty = 0; totalPrice(elem);
+        })
     })
+
+    // fonction de "like" et "dislike"
+
+    document.querySelectorAll(".fa-heart").forEach((elem) => {
+        elem.style.color = 'black';
+        elem.addEventListener("click", () => {
+            if (elem.style.color == 'black') {
+                elem.style.color = 'blueviolet';
+            } else {
+                elem.style.color = 'black';
+            }
+        });
+    });
 }
-
-// fonction de "like" et "dislike"
-
-document.querySelectorAll(".fa-heart").forEach((elem) => {
-
-    elem.addEventListener("click", () => {
-        if (elem.style.color == 'black') {
-            elem.style.color = 'blueviolet';
-        } else {
-            elem.style.color = 'black';
-        }
-    })
-})
 
 
 // Prix total panier
 
 var price = document.querySelectorAll(".unit-price");
-var qtity = document.querySelectorAll(".quantity");
 
 
 let plusAll = document.querySelectorAll(".fa-plus-circle");
@@ -85,29 +86,26 @@ minusAll.forEach((minus) => { minus.addEventListener("click", totalPrice) });
 function totalPrice() {
     let total = 0;
     price.forEach((elem) => {
-        let unitprice = parseInt(elem.innerText);
-        if (elem.nextElementSibling.firstElementChild.nextElementSibling.innerText >= 1) {
-            total += unitprice;
+        let qt = elem.nextElementSibling.firstElementChild.nextElementSibling.innerText;
+        if (qt == 0) {
             document.querySelector(".total").innerText = total + " $";
         }
-    });
-}
+        if (qt >= 1) {
+            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
+                document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
+            })
+        }
+        let unitprice = parseInt(elem.innerText);
+        if (qt >= 1) {
+            total += unitprice;
+            document.querySelector(".total").innerText = total + " $";
 
-
-function priceTotal() {
-    let total=0;
-    price.forEach((elt)=>{
-        let uprice= parseInt(elt.innerText);
-        if(elt.nextElementSibling.firstElementChild.nextElementSibling.innerText=0){
-            total+;
-            document.querySelector(".total").innerText= 0 + " $";
-        }else{
-            total+=uprice;
-            document.querySelector(".toatl").innerText= total + " $";
         }
     })
-
 }
+
+
+
 
 
 
