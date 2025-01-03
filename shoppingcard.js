@@ -71,7 +71,6 @@ for (let i = 0; i < box.length; i++) {
     });
 }
 
-
 // Prix total panier
 
 var price = document.querySelectorAll(".unit-price");
@@ -93,7 +92,7 @@ function totalPrice() {
         if (qt >= 1) {
             elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
                 document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
-            })
+            });
         }
         let unitprice = parseInt(elem.innerText);
         if (qt >= 1) {
@@ -101,7 +100,7 @@ function totalPrice() {
             document.querySelector(".total").innerText = total + " $";
 
         }
-    })
+    });
 }
 
 
