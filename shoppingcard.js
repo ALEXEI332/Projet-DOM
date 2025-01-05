@@ -42,21 +42,17 @@ for (let i = 0; i < box.length; i++) {
 
 
         }
-    })
+    });
 
     // fonction de suppression d'éléments
 
-    document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
-        let uprix = parseInt(elem.parentElement.previousElementSibling.previousElementSibling.innerText);
-        qty = elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText;
-
-        elem.addEventListener("click", () => {
-            elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
-            elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
-            qty = 0; totalPrice(elem);
-        })
-    })
-
+document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
+    let uprix = parseInt(elem.parentElement.previousElementSibling.previousElementSibling.innerText);
+    elem.addEventListener("click", () => {
+        elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
+        elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
+    });
+});
     // fonction de "like" et "dislike"
 
     document.querySelectorAll(".fa-heart").forEach((elem) => {
@@ -89,16 +85,15 @@ function totalPrice() {
         if (qt == 0) {
             document.querySelector(".total").innerText = total + " $";
         }
-        if (qt >= 1) {
-            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-                document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
-            });
-        }
         let unitprice = parseInt(elem.innerText);
         if (qt >= 1) {
             total += unitprice;
             document.querySelector(".total").innerText = total + " $";
-
+        }
+        if (qt >= 1) {
+            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
+                document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
+            });
         }
     });
 }
