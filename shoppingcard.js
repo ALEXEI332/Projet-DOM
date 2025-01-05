@@ -13,7 +13,7 @@ for (let i = 0; i < box.length; i++) {
 
 
     let innerprice = parseInt(amount.innerText);
-    let qty = parseInt(nombre.innerText);
+    let qty = nombre.innerText;
 
 
 
@@ -46,14 +46,17 @@ for (let i = 0; i < box.length; i++) {
 
     // fonction de suppression d'éléments
 
-document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
-    let uprix = parseInt(elem.parentElement.previousElementSibling.previousElementSibling.innerText);
-    elem.addEventListener("click", () => {
-        elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
-        qty[i] = 0;
-        elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
+    let garbage = box[i].children[1].children[4].children[0];
+
+    garbage.addEventListener("click", () => {
+        if (qty >= 1) {
+            nombre.innerText = 0;
+            amount.innerText = innerprice + " $";
+            qty = 0;
+            totalPrice();
+        }
     });
-});
+
     // fonction de "like" et "dislike"
 
     document.querySelectorAll(".fa-heart").forEach((elem) => {
