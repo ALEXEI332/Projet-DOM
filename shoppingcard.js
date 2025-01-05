@@ -50,6 +50,7 @@ document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
     let uprix = parseInt(elem.parentElement.previousElementSibling.previousElementSibling.innerText);
     elem.addEventListener("click", () => {
         elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
+        qty=0;
         elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
     });
 });
