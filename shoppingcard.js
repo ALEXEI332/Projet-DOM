@@ -52,6 +52,7 @@ document.querySelectorAll(".fa-trash-alt").forEach((elem) => {
         elem.parentElement.previousElementSibling.firstElementChild.nextElementSibling.innerText = 0;
         qty[i] = 0;
         elem.parentElement.previousElementSibling.previousElementSibling.innerText = uprix + " $";
+        totalPrice(elem);
     });
 });
     // fonction de "like" et "dislike"
