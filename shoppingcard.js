@@ -50,7 +50,8 @@ for (let i = 0; i < box.length; i++) {
 
     garbage.addEventListener("click", () => {
         boxbody[i].removeChild(box[i]);
-        totalPrice();
+        qty[i]==0;
+
     }
     );
 
@@ -91,13 +92,16 @@ function totalPrice() {
             total += unitprice;
             document.querySelector(".total").innerText = total + " $";
         }
-        if (qt >= 1) {
-            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-                document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
-            });
-        }
+        elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
+            let priceless = document.querySelectorAll(".unit-price");
+            priceless.length = price.length - 1;
+         let unprice =  parseInt(this.innerText);
+            total += parseInt(elem.innerText);
+            document.querySelector(".total").innerText = total -unprice + " $";
+        });
     });
-}
+};
+
 
 
 
