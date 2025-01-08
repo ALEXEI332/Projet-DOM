@@ -50,7 +50,6 @@ for (let i = 0; i < box.length; i++) {
 
     garbage.addEventListener("click", () => {
         boxbody[i].removeChild(box[i]);
-        qty[i]==0;
 
     }
     );
@@ -93,11 +92,7 @@ function totalPrice() {
             document.querySelector(".total").innerText = total + " $";
         }
         elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-            let priceless = document.querySelectorAll(".unit-price");
-            priceless.length = price.length - 1;
-         let unprice =  parseInt(this.innerText);
-            total += parseInt(elem.innerText);
-            document.querySelector(".total").innerText = total -unprice + " $";
+            document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
         });
     });
 };
