@@ -1,7 +1,7 @@
 
 // fonctions pour evenements d'ajout,dimunition,suppression et like dans le panier //
 
-
+var boxbody = document.getElementsByClassName("card-body");
 var box = document.getElementsByClassName("card");
 
 for (let i = 0; i < box.length; i++) {
@@ -49,13 +49,10 @@ for (let i = 0; i < box.length; i++) {
     let garbage = box[i].children[1].children[4].children[0];
 
     garbage.addEventListener("click", () => {
-        if (qty >= 1) {
-            nombre.innerText = 0;
-            amount.innerText = innerprice + " $";
-            qty = 0;
-            totalPrice();
-        }
-    });
+        boxbody[i].removeChild(box[i]);
+        totalPrice();
+    }
+    );
 
     // fonction de "like" et "dislike"
 
