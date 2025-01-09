@@ -53,9 +53,13 @@ for (let i = 0; i < box.length; i++) {
     garbage.addEventListener("click", () => {
         box[i].removeChild(imgUrl);
         box[i].removeChild(boxcontent);
-        totalPrice();
     }
     );
+    if (qty > 0) {
+        nombre.addEventListener("change", () => {
+            totalPrice();
+        });
+    }
 
     // fonction de "like" et "dislike"
 
@@ -90,14 +94,15 @@ function totalPrice() {
             document.querySelector(".total").innerText = total + " $";
         }
         let unitprice = parseInt(elem.innerText);
-        if (qt >= 1) {
+        if (qt > 0) {
             total += unitprice;
             document.querySelector(".total").innerText = total + " $";
+            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
+                elem.nextElementSibling.firstElementChild.nextElementSibling.innerText =0;
+                total -=unitprice;
+                document.querySelector(".total").innerText = total + " $";
+            });
         }
-        elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-            total -= unitprice;
-            document.querySelector(".total").innerText = total + " $";
-        });
     });
 }
 
