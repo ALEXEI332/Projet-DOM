@@ -47,9 +47,12 @@ for (let i = 0; i < box.length; i++) {
     // fonction de suppression d'éléments
 
     let garbage = box[i].children[1].children[4].children[0];
+    let imgUrl = box[i].children[0];
+    let boxcontent = box[i].children[1];
 
     garbage.addEventListener("click", () => {
-        boxbody[i].removeChild(box[i]);
+        box[i].removeChild(imgUrl);
+        box[i].removeChild(boxcontent);
         totalPrice();
     }
     );
@@ -90,11 +93,13 @@ function totalPrice() {
         if (qt >= 1) {
             total += unitprice;
             document.querySelector(".total").innerText = total + " $";
-        } if (qt >= 0) {
-            elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-                document.querySelector(".total").innerText = total - (qt * parseInt(elem.innerText)) + " $";
-            });
         }
+        let totalFirst = total;
+        elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
+            if (qt >= 0) {
+                document.querySelector(".total").innerText = totalFirst - (parseInt(elem.innerText)) + " $";
+            }
+        });
     });
 }
 
