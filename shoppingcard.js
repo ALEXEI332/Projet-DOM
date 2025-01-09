@@ -55,12 +55,7 @@ for (let i = 0; i < box.length; i++) {
         box[i].removeChild(boxcontent);
     }
     );
-    if (qty > 0) {
-        nombre.addEventListener("change", () => {
-            totalPrice();
-        });
-    }
-
+    
     // fonction de "like" et "dislike"
 
     document.querySelectorAll(".fa-heart").forEach((elem) => {
