@@ -94,11 +94,9 @@ function totalPrice() {
             total += unitprice;
             document.querySelector(".total").innerText = total + " $";
         }
-        let totalFirst = total;
         elem.nextElementSibling.nextElementSibling.firstElementChild.addEventListener("click", () => {
-            if (qt >= 0) {
-                document.querySelector(".total").innerText = totalFirst - (parseInt(elem.innerText)) + " $";
-            }
+            total -= unitprice;
+            document.querySelector(".total").innerText = total + " $";
         });
     });
 }
